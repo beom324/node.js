@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+  <body>
+    <div id="root" />
+    <script type="text/babel">
+      function BookList() {
+        return (
+          <table border="1">
+            <thead>
+              <tr>
+                <th>도서번호</th>
+                <th>도서명</th>
+                <th>가격</th>
+                <th>출판사</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>재미있는자바</td>
+                <td>5000</td>
+                <td>쌍용미디어</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>재미있는오라클</td>
+                <td>6000</td>
+                <td>쌍용출판사</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>재미있는노드</td>
+                <td>7000</td>
+                <td>sist01</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>재미있는리액트</td>
+                <td>8000</td>
+                <td>sist02</td>
+              </tr>
+            </thead>
+          </table>
+        );
+      }
+
+      ReactDOM.render(<BookList />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

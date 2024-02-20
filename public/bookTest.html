@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root" />
+    <script type="text/babel">
+      const Thead = () => {
+        return (
+          <thead>
+            <tr>
+              <th>도서번호</th>
+              <th>도서명</th>
+              <th>가격</th>
+              <th>출판사</th>
+            </tr>
+          </thead>
+        );
+      };
+
+      const Tbody = (props) => {
+        const rows = props.listData.map((book) => {
+          //rows에는 tr의배열이 담김
+          return (
+            <tr>
+              <td>{book.BOOKID}</td>
+              <td>{book.BOOKNAME}</td>
+              <td>{book.PRICE}</td>
+              <td>{book.PUBLISHER}</td>
+            </tr>
+          );
+        });
+        return <tbody>{rows}</tbody>; //<tbody>는 tbody를 만들어서 반환하는 사용자정의태그
+      };
+
+      const Table = (props) => {
+        const listData = props.listData;
+        return (
+          <table border="1">
+            <Thead />
+            <Tbody listData={listData}></Tbody>
+          </table>
+        );
+      };
+
+      //axios를 통해서 Ajax통신하기
+      //axios.get("서비스명").then()   then()은 ajax통신 후 행동
+      axios.get("/listBook").then((res) => {
+        //받아온 데이터를 res에 담는다
+        //console.log(res.data); //매개변수.data 하면 넘어온 데이터 확인
+        class App extends React.Component {
+          render() {
+            const list = res.data; // list = 응답한 도서목록의 객체배열(json배열)
+            return (
+              <div>
+                <Table listData={list} />
+              </div>
+            );
+          }
+        }
+        ReactDOM.render(<App />, document.getElementById("root"));
+      });
+    </script>
+  </body>
+</html>
